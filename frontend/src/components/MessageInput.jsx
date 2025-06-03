@@ -1,10 +1,9 @@
-import React from 'react'
-import { useChatStore } from '../store/useChatStore'
-import { useState, useRef } from 'react';
-import { Image, Send, X } from 'lucide-react';
-import toast from 'react-hot-toast';
-const MessageInput = () => {
+import { useRef, useState } from "react";
+import { useChatStore } from "../store/useChatStore";
+import { Image, Send, X } from "lucide-react";
+import toast from "react-hot-toast";
 
+const MessageInput = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -13,7 +12,7 @@ const MessageInput = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file.type.startsWith("image/")) {
-      toast.error("Please select an image file.");
+      toast.error("Please select an image file");
       return;
     }
 
@@ -24,33 +23,32 @@ const MessageInput = () => {
     reader.readAsDataURL(file);
   };
 
-
   const removeImage = () => {
     setImagePreview(null);
-    if (fileInputRef.current) fileInputRef.current.value = null; // Reset the file input
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
-  
-  
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim() && !imagePreview) return;
-    
+
     try {
       await sendMessage({
         text: text.trim(),
-        image: imagePreview
+        image: imagePreview,
       });
-      // clear Form
+
+      // Clear form
       setText("");
       setImagePreview(null);
-      if (fileInputRef.current) fileInputRef.current.value = ""; // Reset the file input
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
-      console.error("Failed sending message:", error);
+      console.error("Failed to send message:", error);
     }
   };
 
   return (
-     <div className="p-4 w-full">
+    <div className="p-4 w-full">
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
@@ -108,5 +106,4 @@ const MessageInput = () => {
     </div>
   );
 };
-
 export default MessageInput;

@@ -30,7 +30,7 @@ jobs:
 
       - name: Install backend dependencies
         run: |
-          cd ../backend
+          cd backend
           npm install
 
       # Optional: Add backend build or test steps here

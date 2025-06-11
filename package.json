@@ -12,10 +12,11 @@
   "description": "",
   "dependencies": {
     "chat-app": "file:",
+    "node": "^24.2.0",
     "path-to-regexp": "^6.2.1",
     "router": "^2.2.0"
   },
-  "engines":{
+  "engines": {
     "node": ">=20"
   }
 }
